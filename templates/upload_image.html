@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 1: Upload Image</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff; /* White background */
+            text-align: center;
+            margin: 0;
+            height: 100vh; /* Full height of the viewport */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333; /* Dark text color */
+        }
+
+        form {
+            background-color: #f0f0f0; /* Light gray background for the form */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Light box shadow */
+            max-width: 400px;
+            margin: 0 auto; /* Center the form */
+        }
+
+        input[type="file"] {
+            margin-bottom: 20px;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50; /* Green button color */
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+        a {
+            margin-top: 20px;
+            text-decoration: none;
+            color: #333; /* Dark text color */
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Page 1: Upload Image</h1>
+    <!-- Your existing upload image form goes here -->
+    <form action="/detect_car" method="post" enctype="multipart/form-data">
+        <!-- ... (existing form fields) -->
+        <input type="file" name="image" accept="image/*" required>
+        <br>
+        <button type="submit">Upload Image</button>
+    </form>
+    <a href="/"><button>Return to Index</button></a>
+</body>
+
+</html>
