@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Violations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        header {
+            padding: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .banner {
+            background-color: #ffcc00;
+            color: black;
+            text-align: center;
+            padding: 10px;
+            margin: 20px;
+            font-size: 18px;
+        }
+
+        .image-cell {
+            text-align: center;
+        }
+
+        .image-cell img {
+            max-width: 100px;
+            max-height: 100px;
+            cursor: pointer;
+        }
+
+        .return-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #008CBA;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .return-button:hover {
+            background-color: #007B9E;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="return-button">Return to Index</a>
+
+    <header>
+        <h1>Violations</h1>
+    </header>
+
+    <div class="banner">
+        Authorities have been already notified about these violations.
+    </div>
+
+    <h2>Violation Details</h2>
+    <table>
+        <tr>
+            <th>Captured Details ID</th>
+            <th>Detected Car Model</th>
+            <th>Detected Color</th>
+            <th>Detected Plate Number</th>
+            <th>Detected Plate Origin</th>
+            <th>Registered Image</th>
+            <th>Detected Image</th>
+            {% if violations[0].mismatch_reason %}
+                <th>Mismatch Reason</th>
+            {% endif %}
+        </tr>
+        {% for violation in violations %}
+        <tr>
+            <td>{{ violation.detected_car.captured_details_id }}</td>
+            <td>{{ violation.detected_car.detected_car_model }}</td>
+            <td>{{ violation.detected_car.detected_color }}</td>
+            <td>{{ violation.detected_car.detected_plate_number }}</td>
+            <td>{{ violation.detected_car.detected_plate_origin }}</td>
+            <td class="image-cell">
+                {% if violation.registered_car %}
+                    <img src="data:image/jpeg;base64,{{ violation.registered_car.car_picture }}">
+                {% else %}
+                    No image available
+                {% endif %}
+            </td>
+            <td class="image-cell"><img src="data:image/jpeg;base64,{{ violation.detected_car.detected_car_picture }}"></td>
+            {% if violations[0].mismatch_reason %}
+                <td>
+                    {% if violation.mismatch_reason %}
+                        {{ violation.mismatch_reason }}
+                    {% else %}
+                        No mismatch reason
+                    {% endif %}
+                </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Detected Cars</h2>
+    <table>
+        <tr>
+            <th>Captured Details ID</th>
+            <th>Detected Car Model</th>
+            <th>Detected Color</th>
+            <th>Detected Plate Number</th>
+            <th>Detected Plate Origin</th>
+            <th>Detected Image</th>
+        </tr>
+        {% for detected_car in detected_cars %}
+        <tr>
+            <td>{{ detected_car.captured_details_id }}</td>
+            <td>{{ detected_car.detected_car_model }}</td>
+            <td>{{ detected_car.detected_color }}</td>
+            <td>{{ detected_car.detected_plate_number }}</td>
+            <td>{{ detected_car.detected_plate_origin }}</td>
+            <td class="image-cell">
+                {% if detected_car.detected_car_picture %}
+                <img src="data:image/jpeg;base64,{{ detected_car.detected_car_picture }}">
+                {% else %}
+                No image
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>
